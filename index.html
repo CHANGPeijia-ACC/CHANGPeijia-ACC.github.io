@@ -4,15 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chang Peijia — Accounting &amp; Data Analytics | NTU Singapore</title>
-<meta name="description" content="Chang Peijia — accounting and data analytics candidate at NTU Singapore. Audit-focused Python projects: voucher validation and reconciliation, and a public procurement analysis.">
+<meta name="description" content="Chang Peijia — accounting and data analytics candidate at NTU Singapore. Audit-focused Python projects: a public procurement audit analysis and a voucher validation and reconciliation tool.">
 <link rel="canonical" href="https://changpeijia-acc.github.io/">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Chang Peijia — Accounting & Data Analytics">
 <meta property="og:description" content="Accounting × Data — turning dispersed transaction records into figures that withstand review. Audit-focused Python projects, NTU Singapore.">
-<meta property="og:image" content="https://changpeijia-acc.github.io/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image" content="https://raw.githubusercontent.com/CHANGPeijia-ACC/sg-procurement-analysis/main/outputs/figures/threshold_zoom_90000.png">
+<meta property="og:image:width" content="1145">
+<meta property="og:image:height" content="709">
+<meta property="og:image:alt" content="Award counts cluster just below Singapore's S$90,000 open-tender threshold.">
 <meta property="og:url" content="https://changpeijia-acc.github.io/">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -49,6 +50,7 @@
   --bg-soft: #f7f7f5;
   --font-en: 'Source Serif 4', 'Lora', Georgia, 'Times New Roman', serif;
   --font-zh: 'Noto Serif SC', 'Songti SC', 'STSong', SimSun, serif;
+  --wide: 880px;
   --measure: 720px;
   --nav-h: 56px;
 }
@@ -83,7 +85,9 @@ a:hover { color: var(--accent-hover); }
 }
 .skip-link:focus { top: 12px; color: #fff; }
 
-.wrap { max-width: var(--measure); margin: 0 auto; padding-inline: 24px; }
+/* Page width is 880px so project cards can hold charts; running text stays at 720px. */
+.wrap { max-width: var(--wide); margin: 0 auto; padding-inline: 24px; }
+main .wrap > :not(.card), footer .wrap > * { max-width: var(--measure); }
 
 /* ---------- Nav ---------- */
 .nav {
@@ -135,27 +139,35 @@ p { margin: 0 0 16px; }
 .btn-primary:hover { background: var(--accent-hover); color: #fff; }
 
 /* ---------- Projects ---------- */
-.section-intro { color: var(--muted); margin-bottom: 32px; }
 .card { border: 1px solid var(--border); border-radius: 4px; padding: 30px 32px; }
-.card + .card { margin-top: 28px; }
-.card-oneliner { font-size: 19px; margin: 8px 0 20px; }
+.card + .card { margin-top: 32px; }
+.card-oneliner, .card dd, .note { max-width: var(--measure); }
 .repo-link {
   display: inline-block; margin-top: 6px; font-size: 15px; overflow-wrap: anywhere;
   font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
 }
-code { font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace; font-size: 0.95em; }
+.card-oneliner { font-size: 19px; margin: 10px 0 20px; }
 .card dl { margin: 0; }
-.card dt {
+.card dt, .note-label {
   font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--accent); margin-top: 18px;
+  color: var(--accent);
 }
+.card dt { margin-top: 18px; }
 .card dd { margin: 4px 0 0; }
-.tags { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
-.tags li {
-  font-size: 14px; line-height: 1.4; padding: 3px 9px; border: 1px solid var(--border);
-  border-radius: 3px; background: var(--bg-soft); color: #333;
+
+.chart { margin: 28px 0 0; }
+.chart-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: 4px; background: #fff; }
+.chart img { display: block; width: 100%; height: auto; }
+.chart figcaption { font-size: 16px; color: var(--muted); margin-top: 8px; }
+
+/* Limitations / Design decisions: a half-step back from the main narrative, never collapsed. */
+.note {
+  margin-top: 28px; padding: 2px 0 2px 16px; border-left: 2px solid var(--accent);
+  font-size: 16px; line-height: 1.65; color: #333;
 }
-.card .btns { margin-top: 24px; }
+.note-label { margin: 0 0 4px; }
+.note p { margin: 0; }
+.card .btns { margin-top: 26px; }
 
 /* ---------- Experience ---------- */
 .lede { font-style: italic; color: var(--muted); border-left: 2px solid var(--accent); padding-left: 16px; margin-bottom: 36px; }
@@ -167,7 +179,7 @@ html[data-lang="zh"] .lede { font-style: normal; }
 .job li + li { margin-top: 8px; }
 
 /* ---------- Skills ---------- */
-.skills { margin: 0; display: grid; grid-template-columns: 11rem 1fr; gap: 14px 24px; }
+.skills { margin: 0; display: grid; grid-template-columns: 11.5rem 1fr; gap: 14px 24px; }
 .skills dt { font-weight: 700; }
 .skills dd { margin: 0; }
 
@@ -179,6 +191,7 @@ html[data-lang="zh"] .lede { font-style: normal; }
 .contact-list a { overflow-wrap: anywhere; }
 
 footer { border-top: 1px solid var(--border); padding-block: 28px; font-size: 15px; color: var(--muted); }
+footer p { margin: 0; }
 
 /* ---------- Reveal (only when JS runs and motion is allowed) ---------- */
 html.js .reveal { opacity: 0; transform: translateY(8px); transition: opacity 280ms ease-out, transform 280ms ease-out; }
@@ -195,8 +208,8 @@ html.js .reveal.in { opacity: 1; transform: none; }
   .nav .wrap { flex-wrap: wrap; align-content: center; gap: 4px 12px; }
   .nav nav { order: 3; width: 100%; }
   .nav-links { gap: 18px; overflow-x: auto; }
-  .lang-toggle, footer, .repo-link, .tags li { font-size: 16px; }
-  .card dt { font-size: 16px; letter-spacing: 0.04em; }
+  .lang-toggle, footer, .repo-link { font-size: 16px; }
+  .card dt, .note-label { font-size: 16px; letter-spacing: 0.04em; }
   section { padding-block: 64px; }
   #hero { padding-block: 44px 48px; }
   .hero-name { font-size: 36px; }
@@ -204,6 +217,7 @@ html.js .reveal.in { opacity: 1; transform: none; }
   h2 { font-size: 26px; }
   h3 { font-size: 21px; }
   .card { padding: 22px 18px; }
+  .chart img { width: 560px; max-width: none; }
   .skills { grid-template-columns: 1fr; gap: 2px; }
   .skills dd { margin-bottom: 14px; }
   .contact-list li { flex-direction: column; gap: 0; }
@@ -242,10 +256,9 @@ html.js .reveal.in { opacity: 1; transform: none; }
       <p class="hero-sub" lang="zh">新加坡南洋理工大学 会计学硕士（数据分析方向）</p>
       <div class="btns">
         <a class="btn btn-primary" href="#projects"><span lang="en">View Projects</span><span lang="zh">查看项目</span></a>
-        <a class="btn" href="Chang_Peijia_CV_EN.pdf" target="_blank" rel="noopener" lang="en">Download CV</a>
-        <a class="btn" href="Chang_Peijia_CV_CN.pdf" target="_blank" rel="noopener" lang="zh">下载简历</a>
+        <a class="btn" href="CHANG_Peijia_CV.pdf" target="_blank" rel="noopener"><span lang="en">Download CV</span><span lang="zh">下载简历</span></a>
         <a class="btn" href="https://github.com/CHANGPeijia-ACC" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href="https://www.linkedin.com/in/peijia-chang" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://www.linkedin.com/in/peijia-chang-922044425" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
   </section>
@@ -254,62 +267,74 @@ html.js .reveal.in { opacity: 1; transform: none; }
   <section id="projects">
     <div class="wrap">
       <h2><span lang="en">Projects</span><span lang="zh">项目</span></h2>
-      <p class="section-intro" lang="en">Two public repositories. Every claim below links to the code behind it.</p>
-      <p class="section-intro" lang="zh">两个公开仓库。下面每一句描述，都能点进代码里核对。</p>
 
-      <!-- Project 1 -->
+      <!-- Project 1: procurement -->
       <article class="card reveal" aria-labelledby="p1-title">
-        <h3 id="p1-title"><span lang="en">Voucher Data Analysis Toolkit</span><span lang="zh">凭证数据分析工具</span></h3>
-        <a class="repo-link" href="https://github.com/CHANGPeijia-ACC/voucher-analysis" target="_blank" rel="noopener">github.com/CHANGPeijia-ACC/voucher-analysis</a>
-        <p class="card-oneliner" lang="en">A Python toolkit that validates, summarises and reconciles accounting voucher data.</p>
-        <p class="card-oneliner" lang="zh">用 Python 完成凭证数据的校验、汇总与对账。</p>
+        <h3 id="p1-title"><span lang="en">Singapore Government Procurement (GeBIZ) — Audit Analysis</span><span lang="zh">新加坡政府采购（GeBIZ）审计式分析</span></h3>
+        <a class="repo-link" href="https://github.com/CHANGPeijia-ACC/sg-procurement-analysis" target="_blank" rel="noopener">github.com/CHANGPeijia-ACC/sg-procurement-analysis</a>
+        <p class="card-oneliner" lang="en">Where would a procurement audit be worth looking? An analysis of 18,464 public award records to find out.</p>
+        <p class="card-oneliner" lang="zh">一次采购审计该从哪里入手？对 18,464 条公开授标记录的分析。</p>
         <dl>
           <dt>Problem</dt>
-          <dd lang="en">Voucher review in practice means scrolling spreadsheets by hand — checking that every entry balances, that nothing is missing, and that the totals agree with the ledger. It is slow and it is exactly the kind of work that hides errors.</dd>
-          <dd lang="zh">实务中复核凭证靠人工翻表格 —— 逐条检查借贷是否平、有没有缺项、合计与账簿是否一致。既慢，又恰好是最容易藏错的环节。</dd>
+          <dd lang="en">Procurement audit scoping is usually driven by judgement and prior year. Singapore publishes every government award — so the question is whether that public record can point to where a closer look is justified, before anyone opens a file.</dd>
+          <dd lang="zh">采购审计的范围划定通常依赖经验和上年底稿。新加坡公开披露每一笔政府授标，问题就变成：在打开任何一份档案之前，这份公开记录能否指出值得细看的地方。</dd>
 
           <dt>Approach</dt>
-          <dd lang="en">Written in Python using only the standard library (<code>csv</code>), so it runs on a client machine with nothing to install. Covers validation (voucher-number format, missing or non-numeric amounts, negative amounts flagged for review), monthly aggregation, a month × account cross-tab, per-account outlier detection against each account’s own mean, and two-way reconciliation against a bank statement that matches on voucher number rather than row order. Logic is packaged into reusable functions rather than one long script.</dd>
-          <dd lang="zh">仅用 Python 标准库（<code>csv</code>）编写，在客户现场的电脑上无需安装任何依赖即可运行。涵盖数据校验（凭证号格式、金额缺失或非数字、负数金额提示人工确认）、月度汇总、月份 × 科目交叉汇总、以各科目自身均值为基准的分组异常检测，以及与银行流水之间按凭证号（而非行序）配对的双向对账。逻辑封装为可复用函数，而非一次性长脚本。</dd>
+          <dd lang="en">Python and pandas over 18,464 award records across 113 agencies and 6,152 supplier names (FY2021–FY2025, data.gov.sg). Three tests: amount-weighted HHI and CR4 concentration per agency; award clustering in shrinking windows (±10% / ±5% / ±2%) around the published S$6,000 and S$90,000 procurement thresholds; and a Benford chi-square test on leading digits at several minimum-amount floors. Supplier-name normalisation was kept deliberately conservative — punctuation and legal-suffix spelling only, no fuzzy matching — and every one of the 7 merged groups was verified by hand.</dd>
+          <dd lang="zh">用 Python 与 pandas 处理 18,464 条授标记录，覆盖 113 个机构、6,152 个供应商名称（FY2021–FY2025，data.gov.sg）。做三项检验：按机构的金额加权 HHI 与 CR4 集中度；围绕 6,000 与 90,000 新元采购门槛、以逐步收窄的窗口（±10% / ±5% / ±2%）统计授标聚集；以及在多个最小金额下限上对首位数字做 Benford 卡方检验。供应商名称规范化刻意保守——只统一标点与法定后缀拼写，不做模糊匹配——合并的 7 组全部人工复核。</dd>
 
-          <dt>Result</dt>
-          <dd lang="en">Takes a voucher file and a bank statement and writes four CSVs — monthly summary, month × account cross-tab, flagged outliers, and a difference list separating book-only, bank-only and amount-mismatch items — replacing the manual spreadsheet pass.</dd>
-          <dd lang="zh">输入一份凭证文件与一份银行流水，输出四个 CSV —— 月度汇总、月份 × 科目交叉表、异常清单，以及区分「只在账簿有 / 只在银行有 / 金额不一致」的差异表，替代原本的手工表格作业。</dd>
+          <dt>Findings</dt>
+          <dd lang="en">Award amounts cluster below the S$90,000 open-tender threshold, and the below:above ratio sharpens as the window narrows (1.25x at ±10%, 1.61x at ±2%) — the signature of deliberate clustering rather than noise. Several agencies show HHI above 4,000 despite having dozens or hundreds of suppliers on record, because one or two contracts dominate dollar spend. Benford's law fails on the full dataset (p &lt; 0.0001) but fits closely once sub-S$1,000 items are excluded (p = 0.12), which says more about the test's assumptions than about the data.</dd>
+          <dd lang="zh">授标金额在 9 万新元公开招标门槛下方聚集，且窗口越窄、下方对上方的比值越高（±10% 时 1.25 倍，±2% 时 1.61 倍），这是刻意聚集而非随机噪声的特征。多个机构在拥有数十甚至数百家供应商的情况下 HHI 仍超过 4,000，因为一两份大合同主导了金额。Benford 检验在全样本下不通过（p &lt; 0.0001），但剔除 1,000 新元以下的小额记录后拟合良好（p = 0.12）——这说明的是检验本身的适用前提，而非数据异常。</dd>
         </dl>
-        <ul class="tags" aria-label="Technologies">
-          <li>Python</li><li><span lang="en">csv (standard library)</span><span lang="zh">csv 标准库</span></li><li><span lang="en">Function encapsulation</span><span lang="zh">函数封装</span></li>
-        </ul>
+
+        <figure class="chart">
+          <div class="chart-scroll" tabindex="0" role="region" data-label-en="Chart: award counts near the S$90,000 threshold" data-label-zh="图表：9 万新元门槛附近的授标数量" aria-label="Chart: award counts near the S$90,000 threshold">
+            <img src="https://raw.githubusercontent.com/CHANGPeijia-ACC/sg-procurement-analysis/main/outputs/figures/threshold_zoom_90000.png"
+                 width="1145" height="709" loading="lazy" decoding="async"
+                 alt="Histogram of award counts in S$1,000 bins from S$81,000 to S$100,000. The tallest bar, about 55 awards, sits in the S$88,000–89,000 band just left of the dashed S$90,000 threshold line; bars to the right of the line are mostly around 20–30."
+                 data-alt-en="Histogram of award counts in S$1,000 bins from S$81,000 to S$100,000. The tallest bar, about 55 awards, sits in the S$88,000–89,000 band just left of the dashed S$90,000 threshold line; bars to the right of the line are mostly around 20–30."
+                 data-alt-zh="授标数量直方图，81,000 至 100,000 新元，每 1,000 新元一档。最高的柱约 55 笔，位于虚线标出的 90,000 新元门槛左侧的 88,000–89,000 新元区间；门槛右侧的柱大多在 20 到 30 笔之间。">
+          </div>
+          <figcaption><span lang="en">Award counts cluster just below Singapore's S$90,000 open-tender threshold.</span><span lang="zh">授标金额在新加坡 9 万新元公开招标门槛下方明显聚集。</span></figcaption>
+        </figure>
+
+        <aside class="note" aria-label="Limitations">
+          <p class="note-label">Limitations</p>
+          <p lang="en">Threshold clustering and Benford deviation are screening signals, not evidence — both have innocent explanations. The concentration figures are a lower bound, since conservative name matching never merges distinct entities but may miss true duplicates. Whole-of-government metrics are not meaningful; every number should be read at agency level.</p>
+          <p lang="zh">门槛聚集与 Benford 偏离是筛查信号，不是证据，二者都存在合理解释。集中度数字是下限——保守的名称匹配不会合并不同主体，但可能漏掉真正的重复。全政府口径的指标没有意义，所有数字都应在机构层面阅读。</p>
+        </aside>
+
         <div class="btns">
-          <a class="btn btn-primary" href="https://github.com/CHANGPeijia-ACC/voucher-analysis" target="_blank" rel="noopener"><span lang="en">View on GitHub</span><span lang="zh">在 GitHub 查看</span></a>
-          <a class="btn" href="https://github.com/CHANGPeijia-ACC/voucher-analysis/blob/main/voucher_analysis.py" target="_blank" rel="noopener"><span lang="en">Read the code</span><span lang="zh">阅读代码</span></a>
+          <a class="btn btn-primary" href="https://github.com/CHANGPeijia-ACC/sg-procurement-analysis" target="_blank" rel="noopener"><span lang="en">View on GitHub</span><span lang="zh">在 GitHub 查看</span></a>
+          <a class="btn" href="https://github.com/CHANGPeijia-ACC/sg-procurement-analysis/blob/main/notebooks/01_procurement_analysis.ipynb" target="_blank" rel="noopener"><span lang="en">Read the notebook</span><span lang="zh">阅读 Notebook</span></a>
         </div>
       </article>
 
-      <!-- Project 2 -->
+      <!-- Project 2: voucher tool -->
       <article class="card reveal" aria-labelledby="p2-title">
-        <h3 id="p2-title"><span lang="en">Singapore Government Procurement — Audit Analysis</span><span lang="zh">新加坡政府采购审计分析</span></h3>
-        <a class="repo-link" href="https://github.com/CHANGPeijia-ACC/sg-procurement-analysis" target="_blank" rel="noopener">github.com/CHANGPeijia-ACC/sg-procurement-analysis</a>
-        <p class="card-oneliner" lang="en">A pandas analysis of 18,464 public contract awards, screening for supplier concentration, threshold clustering and leading-digit anomalies.</p>
-        <p class="card-oneliner" lang="zh">用 pandas 分析 18,464 条政府中标记录，筛查供应商集中度、金额阈值聚集与首位数字异常。</p>
+        <h3 id="p2-title"><span lang="en">Voucher Data Analysis Tool</span><span lang="zh">凭证数据分析工具</span></h3>
+        <a class="repo-link" href="https://github.com/CHANGPeijia-ACC/voucher-analysis" target="_blank" rel="noopener">github.com/CHANGPeijia-ACC/voucher-analysis</a>
+        <p class="card-oneliner" lang="en">Month-end voucher review, done in Python instead of by hand in Excel.</p>
+        <p class="card-oneliner" lang="zh">把月结前的凭证复核从 Excel 手工搬到 Python。</p>
         <dl>
           <dt>Problem</dt>
-          <dd lang="en">Singapore publishes every government contract award through GeBIZ, but the file is a flat list of 18,464 rows. It records what was bought; it does not show which agencies depend on a single supplier, or whether contracts are being kept just under the value that would trigger an open tender. Answering those questions means rebuilding the data first.</dd>
-          <dd lang="zh">新加坡通过 GeBIZ 公开每一笔政府采购中标记录，但拿到手的是一张 18,464 行的平表。它记录了买了什么，却看不出哪些机构依赖单一供应商，也看不出合同金额是否被压在公开招标门槛之下。要回答这些问题，得先把数据重建一遍。</dd>
+          <dd lang="en">Pre-close voucher review is usually manual: filter for odd amounts, pivot by account, VLOOKUP against the bank statement. It is slow, and it is repeated every month.</dd>
+          <dd lang="zh">月结前的凭证复核通常是手工的：筛异常金额、透视表做科目汇总、用 VLOOKUP 和银行流水核对。慢，而且每个月都要重来一遍。</dd>
 
           <dt>Approach</dt>
-          <dd lang="en">Python with pandas. Supplier names were normalised conservatively — case, punctuation and legal-suffix spelling only — after spot checks showed that keyword matching would merge separately registered companies and overstate concentration. Concentration is measured as HHI and CR4 per agency; threshold clustering is tested with progressively narrower windows around Singapore’s published S$6,000 and S$90,000 procurement limits; leading digits are tested against Benford’s Law with a scipy chi-square test.</dd>
-          <dd lang="zh">Python 与 pandas。供应商名称的标准化刻意保守 —— 只处理大小写、标点与法定后缀写法；因为抽查发现，按关键词合并会把不同的注册公司并成一家，从而虚高集中度。集中度按机构计算 HHI 与 CR4；阈值聚集用逐步收窄的窗口，检验新加坡公布的 6,000 与 90,000 新元采购门槛；首位数字用 scipy 卡方检验与 Benford 定律对比。</dd>
-
-          <dt>Result</dt>
-          <dd lang="en">One agency with 64 suppliers on record still reaches an HHI of 8,314 — its spend is dominated by a single contract. Award counts spike in the S$88,000–89,000 band just below the S$90,000 open-tender threshold, and the below-to-above ratio sharpens from 1.25× to 1.61× as the window narrows, which is the signature of clustering rather than noise. Leading digits fit Benford’s Law once amounts under S$1,000 are excluded (p = 0.12). Each finding is published with its limitations: these are screening signals, not proof.</dd>
-          <dd lang="zh">某机构名下有 64 家供应商，HHI 仍达 8,314 —— 金额被单一合同占据。中标金额在 88,000–89,000 新元区间出现尖峰，正好卡在 90,000 新元公开招标门槛之下；窗口越收窄，下方与上方的比值从 1.25 倍升到 1.61 倍，这是聚集而非噪声的特征。剔除 1,000 新元以下的小额后，首位数字与 Benford 定律吻合（p = 0.12）。每条结论都附上了局限：这些是筛查信号，不是证据。</dd>
+          <dd lang="en">Python standard library only — no third-party dependencies, runs with a single command. Two CSVs in (ledger and bank statement), five reports out: validation, monthly summary, month × account cross-tab, per-account outlier flags, and bank reconciliation.</dd>
+          <dd lang="zh">仅用 Python 标准库，无第三方依赖，一条命令运行。输入账簿与银行流水两个 CSV，输出五份报表：数据校验、月度汇总、月份 × 科目交叉汇总、按科目的异常标记、银行对账。</dd>
         </dl>
-        <ul class="tags" aria-label="Technologies">
-          <li>Python</li><li>pandas</li><li>scipy</li><li>matplotlib</li><li>Jupyter</li>
-        </ul>
+
+        <aside class="note" aria-label="Design decisions">
+          <p class="note-label">Design decisions</p>
+          <p lang="en" id="dd-en">Outlier thresholds are set per account rather than against a global mean — travel and office expenses sit at different magnitudes: in the sample data, three times the global mean is about 15,356 while three times the office-expense mean is 705, so a global threshold sets the bar for office items more than twenty times higher. Reconciliation is keyed on voucher number rather than row order, since real ledgers and bank statements differ in both count and sequence; keying also separates ledger-only from bank-only differences naturally. Multiple comparison is skipped when an account's mean is non-positive, because "greater than 3x a negative number" would flag nearly everything.</p>
+          <p lang="zh" id="dd-zh">异常阈值按科目分别设定，而非用全局均值——差旅费与办公费的量级完全不同：在示例数据中，全局均值的 3 倍约为 15,356，而办公费均值的 3 倍是 705，全局阈值会把办公费的异常门槛抬高二十多倍。对账以凭证号为键而非按行号顺序比对，因为真实账簿与银行流水在笔数和顺序上都不一致；以凭证号为键还能自然区分「只在账簿有」与「只在银行有」两类差异。当某科目均值非正时跳过倍数比较，否则「大于均值 3 倍」会退化成「大于一个更小的负数」，几乎所有记录都会被误判。</p>
+        </aside>
+
         <div class="btns">
-          <a class="btn btn-primary" href="https://github.com/CHANGPeijia-ACC/sg-procurement-analysis" target="_blank" rel="noopener"><span lang="en">View on GitHub</span><span lang="zh">在 GitHub 查看</span></a>
-          <a class="btn" href="https://github.com/CHANGPeijia-ACC/sg-procurement-analysis/blob/main/src/analysis.py" target="_blank" rel="noopener"><span lang="en">Read the code</span><span lang="zh">阅读代码</span></a>
+          <a class="btn btn-primary" href="https://github.com/CHANGPeijia-ACC/voucher-analysis" target="_blank" rel="noopener"><span lang="en">View on GitHub</span><span lang="zh">在 GitHub 查看</span></a>
         </div>
       </article>
     </div>
@@ -319,14 +344,14 @@ html.js .reveal.in { opacity: 1; transform: none; }
   <section id="experience">
     <div class="wrap">
       <h2><span lang="en">Experience</span><span lang="zh">实习经历</span></h2>
-      <p class="lede" lang="en">The toolkit above exists because of this work — the manual voucher review it automates is exactly what these two internships consisted of.</p>
-      <p class="lede" lang="zh">上面那个工具正是从这两段实习里长出来的 —— 它自动化的手工凭证复核，就是这两段实习每天在做的事。</p>
+      <p class="lede" lang="en">Both projects above came out of this work — the manual voucher review one of them automates is exactly what these internships consisted of.</p>
+      <p class="lede" lang="zh">上面两个项目都是从这些工作里长出来的 —— 其中一个自动化掉的手工凭证复核，正是这两段实习每天在做的事。</p>
 
       <div class="job reveal">
         <h3 lang="en">China State Construction Eighth Engineering Division, New-Type Construction Co., Ltd.</h3>
         <h3 lang="zh">中建八局新型建造工程有限公司</h3>
-        <p class="job-meta" lang="en">Finance Intern · Shanghai · Aug 2024</p>
-        <p class="job-meta" lang="zh">财务实习生 · 财务资金部 · 2024.08</p>
+        <p class="job-meta" lang="en">Finance Intern · Aug 2024</p>
+        <p class="job-meta" lang="zh">财务实习生 · 2024.08</p>
         <ul lang="en">
           <li>Reviewed approximately 500 May–June vouchers and expense claims against reimbursement policy; codified recurring rejection reasons into a compliance checklist retained by the finance team for audit preparation.</li>
           <li>Reconciled project costs against operational records, surfacing 20 variances for follow-up before month-end close.</li>
@@ -344,7 +369,7 @@ html.js .reveal.in { opacity: 1; transform: none; }
         <p class="job-meta" lang="zh">审计实习生 · 2024.06 – 2024.08</p>
         <ul lang="en">
           <li>Sampled 300+ expense-cycle vouchers, tracing each to invoice, contract and general-ledger entry; verified exceptions with the client and cleared or proposed each for adjustment before fieldwork close.</li>
-          <li>Prepared 40+ audit working papers to the firm’s indexing standard.</li>
+          <li>Prepared 40+ audit working papers to the firm's indexing standard.</li>
         </ul>
         <ul lang="zh">
           <li>抽样测试费用循环 300+ 笔费用类凭证（含差旅费、办公费等科目），逐笔追溯至发票、合同与总账分录；就单据缺失、审批不全、发票与合同金额不符等异常逐项与客户进行核实，外勤工作结束前全部澄清或提请调整。</li>
@@ -362,6 +387,10 @@ html.js .reveal.in { opacity: 1; transform: none; }
         <dt>Python</dt>
         <dd lang="en">pandas, data cleaning, grouped aggregation, CSV/file parsing, function encapsulation</dd>
         <dd lang="zh">pandas、数据清洗、分组汇总、CSV 与文件解析、函数封装</dd>
+
+        <dt><span lang="en">Analytics methods</span><span lang="zh">分析方法</span></dt>
+        <dd lang="en">HHI / CR4 concentration, Benford's law testing, threshold clustering, reconciliation logic, mixed-integer programming</dd>
+        <dd lang="zh">HHI / CR4 集中度、Benford 定律检验、门槛聚集检验、对账逻辑、混合整数规划</dd>
 
         <dt>SQL</dt>
         <dd lang="en">Foundations in progress (NTU MACC data analytics curriculum)</dd>
@@ -395,8 +424,8 @@ html.js .reveal.in { opacity: 1; transform: none; }
       <ul class="contact-list">
         <li><span class="label"><span lang="en">Email</span><span lang="zh">邮箱</span></span><a href="mailto:PCHANG007@e.ntu.edu.sg">PCHANG007@e.ntu.edu.sg</a></li>
         <li><span class="label">GitHub</span><a href="https://github.com/CHANGPeijia-ACC" target="_blank" rel="noopener">github.com/CHANGPeijia-ACC</a></li>
-        <li><span class="label">LinkedIn</span><a href="https://www.linkedin.com/in/peijia-chang" target="_blank" rel="noopener">linkedin.com/in/peijia-chang</a></li>
-        <li><span class="label"><span lang="en">CV</span><span lang="zh">简历</span></span><a href="Chang_Peijia_CV_EN.pdf" target="_blank" rel="noopener" lang="en">Download CV (PDF)</a><a href="Chang_Peijia_CV_CN.pdf" target="_blank" rel="noopener" lang="zh">下载简历（PDF）</a></li>
+        <li><span class="label">LinkedIn</span><a href="https://www.linkedin.com/in/peijia-chang-922044425" target="_blank" rel="noopener">linkedin.com/in/peijia-chang-922044425</a></li>
+        <li><span class="label"><span lang="en">CV</span><span lang="zh">简历</span></span><a href="CHANG_Peijia_CV.pdf" target="_blank" rel="noopener"><span lang="en">Download CV (PDF)</span><span lang="zh">下载简历（PDF，英文）</span></a></li>
       </ul>
     </div>
   </section>
@@ -405,8 +434,7 @@ html.js .reveal.in { opacity: 1; transform: none; }
 
 <footer>
   <div class="wrap">
-    <p lang="en">© 2026 Chang Peijia · Static page, no trackers or analytics.</p>
-    <p lang="zh">© 2026 常沛甲 · 纯静态页面，无追踪与统计脚本。</p>
+    <p><span lang="en">© 2026 Chang Peijia</span><span lang="zh">© 2026 常沛甲</span></p>
   </div>
 </footer>
 
@@ -422,6 +450,12 @@ html.js .reveal.in { opacity: 1; transform: none; }
       el.setAttribute('aria-current', String(el.getAttribute('data-code') === lang));
     });
     toggle.setAttribute('aria-label', lang === 'zh' ? 'Switch to English' : '切换到中文');
+    document.querySelectorAll('[data-alt-' + lang + ']').forEach(function (el) {
+      el.setAttribute('alt', el.getAttribute('data-alt-' + lang));
+    });
+    document.querySelectorAll('[data-label-' + lang + ']').forEach(function (el) {
+      el.setAttribute('aria-label', el.getAttribute('data-label-' + lang));
+    });
     try { localStorage.setItem('lang', lang); } catch (e) {}
   }
 
