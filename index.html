@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chang Peijia — Accounting &amp; Data Analytics | NTU Singapore</title>
+<meta name="description" content="Chang Peijia — accounting and data analytics candidate at NTU Singapore. Audit-focused Python projects: voucher validation and reconciliation, and a public procurement analysis.">
+<link rel="canonical" href="https://changpeijia-acc.github.io/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chang Peijia — Accounting & Data Analytics">
+<meta property="og:description" content="Accounting × Data — turning dispersed transaction records into figures that withstand review. Audit-focused Python projects, NTU Singapore.">
+<meta property="og:image" content="https://changpeijia-acc.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://changpeijia-acc.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='4' fill='%231e3a5f'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='28' font-weight='700' fill='%23fff' text-anchor='middle'%3ECP%3C/text%3E%3C/svg%3E">
+
+<!-- Fonts load without blocking render; system serif shows first and stays if Google Fonts is unreachable. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap"></noscript>
+
+<script>
+(function () {
+  var d = document.documentElement;
+  d.classList.add('js');
+  try {
+    var saved = localStorage.getItem('lang');
+    if (saved === 'zh' || saved === 'en') {
+      d.setAttribute('data-lang', saved);
+      d.setAttribute('lang', saved === 'zh' ? 'zh-CN' : 'en');
+    }
+  } catch (e) {}
+})();
+</script>
+
+<style>
+:root {
+  --text: #1a1a1a;
+  --muted: #595959;
+  --accent: #1e3a5f;
+  --accent-hover: #142840;
+  --border: #dcdcdc;
+  --bg: #ffffff;
+  --bg-soft: #f7f7f5;
+  --font-en: 'Source Serif 4', 'Lora', Georgia, 'Times New Roman', serif;
+  --font-zh: 'Noto Serif SC', 'Songti SC', 'STSong', SimSun, serif;
+  --measure: 720px;
+  --nav-h: 56px;
+}
+
+html[data-lang="en"] [lang="zh"],
+html[data-lang="zh"] [lang="en"] { display: none !important; }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-en);
+  font-size: 18px;
+  line-height: 1.7;
+  -webkit-text-size-adjust: 100%;
+}
+html[data-lang="zh"] body { font-family: var(--font-zh); }
+
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--accent-hover); }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.skip-link {
+  position: absolute; left: 16px; top: -48px; z-index: 100;
+  background: var(--accent); color: #fff; padding: 8px 14px; border-radius: 4px; text-decoration: none;
+}
+.skip-link:focus { top: 12px; color: #fff; }
+
+.wrap { max-width: var(--measure); margin: 0 auto; padding-inline: 24px; }
+
+/* ---------- Nav ---------- */
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 50; height: var(--nav-h);
+  background: rgba(255, 255, 255, 0.96); border-bottom: 1px solid var(--border);
+}
+.nav .wrap { height: 100%; display: flex; align-items: center; gap: 24px; }
+.nav-brand { font-weight: 700; color: var(--text); text-decoration: none; margin-right: auto; white-space: nowrap; }
+.nav-links { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; }
+.nav-links a { color: var(--text); text-decoration: none; font-size: 16px; }
+.nav-links a:hover { color: var(--accent); text-decoration: underline; }
+
+.lang-toggle {
+  font: inherit; font-size: 15px; line-height: 1; cursor: pointer;
+  background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px;
+  padding: 7px 10px; min-height: 36px;
+}
+.lang-toggle:hover { background: var(--accent); color: #fff; }
+.lang-toggle .sep { opacity: 0.45; margin: 0 4px; }
+.lang-toggle [aria-current="true"] { font-weight: 700; }
+
+/* ---------- Sections ---------- */
+main { padding-top: var(--nav-h); }
+section { padding-block: 88px; }
+section + section { border-top: 1px solid var(--border); }
+
+h1, h2, h3 { line-height: 1.25; margin: 0; font-weight: 700; }
+h2 {
+  font-size: 30px; display: inline-block; padding-bottom: 6px; margin-bottom: 28px;
+  border-bottom: 2px solid var(--accent);
+}
+h3 { font-size: 23px; }
+p { margin: 0 0 16px; }
+
+/* ---------- Hero ---------- */
+#hero { padding-block: 72px 64px; border-top: 0; }
+.hero-name { font-size: 48px; letter-spacing: -0.01em; margin-bottom: 18px; }
+.hero-tagline { font-size: 23px; line-height: 1.5; margin-bottom: 14px; }
+.hero-sub { color: var(--muted); margin-bottom: 32px; }
+
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 9px 18px;
+  font-size: 16px; text-decoration: none; border-radius: 4px; border: 1px solid var(--accent);
+  color: var(--accent); background: transparent; white-space: nowrap;
+}
+.btn:hover { background: var(--bg-soft); color: var(--accent-hover); }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-hover); color: #fff; }
+
+/* ---------- Projects ---------- */
+.section-intro { color: var(--muted); margin-bottom: 32px; }
+.card { border: 1px solid var(--border); border-radius: 4px; padding: 30px 32px; }
+.card + .card { margin-top: 28px; }
+.card-oneliner { font-size: 19px; margin: 8px 0 20px; }
+.repo-link {
+  display: inline-block; margin-top: 6px; font-size: 15px; overflow-wrap: anywhere;
+  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+}
+code { font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace; font-size: 0.95em; }
+.card dl { margin: 0; }
+.card dt {
+  font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent); margin-top: 18px;
+}
+.card dd { margin: 4px 0 0; }
+.tags { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.tags li {
+  font-size: 14px; line-height: 1.4; padding: 3px 9px; border: 1px solid var(--border);
+  border-radius: 3px; background: var(--bg-soft); color: #333;
+}
+.card .btns { margin-top: 24px; }
+
+/* ---------- Experience ---------- */
+.lede { font-style: italic; color: var(--muted); border-left: 2px solid var(--accent); padding-left: 16px; margin-bottom: 36px; }
+html[data-lang="zh"] .lede { font-style: normal; }
+.job + .job { margin-top: 36px; }
+.job h3 { font-size: 20px; }
+.job-meta { color: var(--muted); font-size: 16px; margin: 4px 0 10px; }
+.job ul { margin: 0; padding-left: 20px; }
+.job li + li { margin-top: 8px; }
+
+/* ---------- Skills ---------- */
+.skills { margin: 0; display: grid; grid-template-columns: 11rem 1fr; gap: 14px 24px; }
+.skills dt { font-weight: 700; }
+.skills dd { margin: 0; }
+
+/* ---------- Contact ---------- */
+.contact-list { list-style: none; padding: 0; margin: 24px 0 0; }
+.contact-list li { display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.contact-list li:first-child { border-top: 1px solid var(--border); }
+.contact-list .label { min-width: 6.5rem; color: var(--muted); }
+.contact-list a { overflow-wrap: anywhere; }
+
+footer { border-top: 1px solid var(--border); padding-block: 28px; font-size: 15px; color: var(--muted); }
+
+/* ---------- Reveal (only when JS runs and motion is allowed) ---------- */
+html.js .reveal { opacity: 0; transform: translateY(8px); transition: opacity 280ms ease-out, transform 280ms ease-out; }
+html.js .reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 767px) {
+  :root { --nav-h: 96px; }
+  body { font-size: 17px; }
+  .wrap { padding-inline: 18px; }
+  .nav .wrap { flex-wrap: wrap; align-content: center; gap: 4px 12px; }
+  .nav nav { order: 3; width: 100%; }
+  .nav-links { gap: 18px; overflow-x: auto; }
+  .lang-toggle, footer, .repo-link, .tags li { font-size: 16px; }
+  .card dt { font-size: 16px; letter-spacing: 0.04em; }
+  section { padding-block: 64px; }
+  #hero { padding-block: 44px 48px; }
+  .hero-name { font-size: 36px; }
+  .hero-tagline { font-size: 20px; }
+  h2 { font-size: 26px; }
+  h3 { font-size: 21px; }
+  .card { padding: 22px 18px; }
+  .skills { grid-template-columns: 1fr; gap: 2px; }
+  .skills dd { margin-bottom: 14px; }
+  .contact-list li { flex-direction: column; gap: 0; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main"><span lang="en">Skip to content</span><span lang="zh">跳到正文</span></a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="#hero"><span lang="en">Chang Peijia</span><span lang="zh">常沛甲</span></a>
+    <nav aria-label="Sections">
+      <ul class="nav-links">
+        <li><a href="#projects"><span lang="en">Projects</span><span lang="zh">项目</span></a></li>
+        <li><a href="#experience"><span lang="en">Experience</span><span lang="zh">经历</span></a></li>
+        <li><a href="#skills"><span lang="en">Skills</span><span lang="zh">技能</span></a></li>
+        <li><a href="#contact"><span lang="en">Contact</span><span lang="zh">联系</span></a></li>
+      </ul>
+    </nav>
+    <button class="lang-toggle" type="button" id="lang-toggle">
+      <span data-code="en">EN</span><span class="sep" aria-hidden="true">/</span><span data-code="zh">中</span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===================== HERO ===================== -->
+  <section id="hero">
+    <div class="wrap">
+      <h1 class="hero-name"><span lang="en">Chang Peijia</span><span lang="zh">常沛甲</span></h1>
+      <p class="hero-tagline" lang="en">Accounting × Data — turning dispersed transaction records into figures that withstand review.</p>
+      <p class="hero-tagline" lang="zh">会计 × 数据 —— 把分散的交易记录还原成经得起复核的数字</p>
+      <p class="hero-sub" lang="en">MSc Accountancy (Data Analytics), Nanyang Technological University · Singapore</p>
+      <p class="hero-sub" lang="zh">新加坡南洋理工大学 会计学硕士（数据分析方向）</p>
+      <div class="btns">
+        <a class="btn btn-primary" href="#projects"><span lang="en">View Projects</span><span lang="zh">查看项目</span></a>
+        <a class="btn" href="Chang_Peijia_CV_EN.pdf" target="_blank" rel="noopener" lang="en">Download CV</a>
+        <a class="btn" href="Chang_Peijia_CV_CN.pdf" target="_blank" rel="noopener" lang="zh">下载简历</a>
+        <a class="btn" href="https://github.com/CHANGPeijia-ACC" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/peijia-chang" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROJECTS ===================== -->
+  <section id="projects">
+    <div class="wrap">
+      <h2><span lang="en">Projects</span><span lang="zh">项目</span></h2>
+      <p class="section-intro" lang="en">Two public repositories. Every claim below links to the code behind it.</p>
+      <p class="section-intro" lang="zh">两个公开仓库。下面每一句描述，都能点进代码里核对。</p>
+
+      <!-- Project 1 -->
+      <article class="card reveal" aria-labelledby="p1-title">
+        <h3 id="p1-title"><span lang="en">Voucher Data Analysis Toolkit</span><span lang="zh">凭证数据分析工具</span></h3>
+        <a class="repo-link" href="https://github.com/CHANGPeijia-ACC/voucher-analysis" target="_blank" rel="noopener">github.com/CHANGPeijia-ACC/voucher-analysis</a>
+        <p class="card-oneliner" lang="en">A Python toolkit that validates, summarises and reconciles accounting voucher data.</p>
+        <p class="card-oneliner" lang="zh">用 Python 完成凭证数据的校验、汇总与对账。</p>
+        <dl>
+          <dt>Problem</dt>
+          <dd lang="en">Voucher review in practice means scrolling spreadsheets by hand — checking that every entry balances, that nothing is missing, and that the totals agree with the ledger. It is slow and it is exactly the kind of work that hides errors.</dd>
+          <dd lang="zh">实务中复核凭证靠人工翻表格 —— 逐条检查借贷是否平、有没有缺项、合计与账簿是否一致。既慢，又恰好是最容易藏错的环节。</dd>
+
+          <dt>Approach</dt>
+          <dd lang="en">Written in Python using only the standard library (<code>csv</code>), so it runs on a client machine with nothing to install. Covers validation (voucher-number format, missing or non-numeric amounts, negative amounts flagged for review), monthly aggregation, a month × account cross-tab, per-account outlier detection against each account’s own mean, and two-way reconciliation against a bank statement that matches on voucher number rather than row order. Logic is packaged into reusable functions rather than one long script.</dd>
+          <dd lang="zh">仅用 Python 标准库（<code>csv</code>）编写，在客户现场的电脑上无需安装任何依赖即可运行。涵盖数据校验（凭证号格式、金额缺失或非数字、负数金额提示人工确认）、月度汇总、月份 × 科目交叉汇总、以各科目自身均值为基准的分组异常检测，以及与银行流水之间按凭证号（而非行序）配对的双向对账。逻辑封装为可复用函数，而非一次性长脚本。</dd>
+
+          <dt>Result</dt>
+          <dd lang="en">Takes a voucher file and a bank statement and writes four CSVs — monthly summary, month × account cross-tab, flagged outliers, and a difference list separating book-only, bank-only and amount-mismatch items — replacing the manual spreadsheet pass.</dd>
+          <dd lang="zh">输入一份凭证文件与一份银行流水，输出四个 CSV —— 月度汇总、月份 × 科目交叉表、异常清单，以及区分「只在账簿有 / 只在银行有 / 金额不一致」的差异表，替代原本的手工表格作业。</dd>
+        </dl>
+        <ul class="tags" aria-label="Technologies">
+          <li>Python</li><li><span lang="en">csv (standard library)</span><span lang="zh">csv 标准库</span></li><li><span lang="en">Function encapsulation</span><span lang="zh">函数封装</span></li>
+        </ul>
+        <div class="btns">
+          <a class="btn btn-primary" href="https://github.com/CHANGPeijia-ACC/voucher-analysis" target="_blank" rel="noopener"><span lang="en">View on GitHub</span><span lang="zh">在 GitHub 查看</span></a>
+          <a class="btn" href="https://github.com/CHANGPeijia-ACC/voucher-analysis/blob/main/voucher_analysis.py" target="_blank" rel="noopener"><span lang="en">Read the code</span><span lang="zh">阅读代码</span></a>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="card reveal" aria-labelledby="p2-title">
+        <h3 id="p2-title"><span lang="en">Singapore Government Procurement — Audit Analysis</span><span lang="zh">新加坡政府采购审计分析</span></h3>
+        <a class="repo-link" href="https://github.com/CHANGPeijia-ACC/sg-procurement-analysis" target="_blank" rel="noopener">github.com/CHANGPeijia-ACC/sg-procurement-analysis</a>
+        <p class="card-oneliner" lang="en">A pandas analysis of 18,464 public contract awards, screening for supplier concentration, threshold clustering and leading-digit anomalies.</p>
+        <p class="card-oneliner" lang="zh">用 pandas 分析 18,464 条政府中标记录，筛查供应商集中度、金额阈值聚集与首位数字异常。</p>
+        <dl>
+          <dt>Problem</dt>
+          <dd lang="en">Singapore publishes every government contract award through GeBIZ, but the file is a flat list of 18,464 rows. It records what was bought; it does not show which agencies depend on a single supplier, or whether contracts are being kept just under the value that would trigger an open tender. Answering those questions means rebuilding the data first.</dd>
+          <dd lang="zh">新加坡通过 GeBIZ 公开每一笔政府采购中标记录，但拿到手的是一张 18,464 行的平表。它记录了买了什么，却看不出哪些机构依赖单一供应商，也看不出合同金额是否被压在公开招标门槛之下。要回答这些问题，得先把数据重建一遍。</dd>
+
+          <dt>Approach</dt>
+          <dd lang="en">Python with pandas. Supplier names were normalised conservatively — case, punctuation and legal-suffix spelling only — after spot checks showed that keyword matching would merge separately registered companies and overstate concentration. Concentration is measured as HHI and CR4 per agency; threshold clustering is tested with progressively narrower windows around Singapore’s published S$6,000 and S$90,000 procurement limits; leading digits are tested against Benford’s Law with a scipy chi-square test.</dd>
+          <dd lang="zh">Python 与 pandas。供应商名称的标准化刻意保守 —— 只处理大小写、标点与法定后缀写法；因为抽查发现，按关键词合并会把不同的注册公司并成一家，从而虚高集中度。集中度按机构计算 HHI 与 CR4；阈值聚集用逐步收窄的窗口，检验新加坡公布的 6,000 与 90,000 新元采购门槛；首位数字用 scipy 卡方检验与 Benford 定律对比。</dd>
+
+          <dt>Result</dt>
+          <dd lang="en">One agency with 64 suppliers on record still reaches an HHI of 8,314 — its spend is dominated by a single contract. Award counts spike in the S$88,000–89,000 band just below the S$90,000 open-tender threshold, and the below-to-above ratio sharpens from 1.25× to 1.61× as the window narrows, which is the signature of clustering rather than noise. Leading digits fit Benford’s Law once amounts under S$1,000 are excluded (p = 0.12). Each finding is published with its limitations: these are screening signals, not proof.</dd>
+          <dd lang="zh">某机构名下有 64 家供应商，HHI 仍达 8,314 —— 金额被单一合同占据。中标金额在 88,000–89,000 新元区间出现尖峰，正好卡在 90,000 新元公开招标门槛之下；窗口越收窄，下方与上方的比值从 1.25 倍升到 1.61 倍，这是聚集而非噪声的特征。剔除 1,000 新元以下的小额后，首位数字与 Benford 定律吻合（p = 0.12）。每条结论都附上了局限：这些是筛查信号，不是证据。</dd>
+        </dl>
+        <ul class="tags" aria-label="Technologies">
+          <li>Python</li><li>pandas</li><li>scipy</li><li>matplotlib</li><li>Jupyter</li>
+        </ul>
+        <div class="btns">
+          <a class="btn btn-primary" href="https://github.com/CHANGPeijia-ACC/sg-procurement-analysis" target="_blank" rel="noopener"><span lang="en">View on GitHub</span><span lang="zh">在 GitHub 查看</span></a>
+          <a class="btn" href="https://github.com/CHANGPeijia-ACC/sg-procurement-analysis/blob/main/src/analysis.py" target="_blank" rel="noopener"><span lang="en">Read the code</span><span lang="zh">阅读代码</span></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== EXPERIENCE ===================== -->
+  <section id="experience">
+    <div class="wrap">
+      <h2><span lang="en">Experience</span><span lang="zh">实习经历</span></h2>
+      <p class="lede" lang="en">The toolkit above exists because of this work — the manual voucher review it automates is exactly what these two internships consisted of.</p>
+      <p class="lede" lang="zh">上面那个工具正是从这两段实习里长出来的 —— 它自动化的手工凭证复核，就是这两段实习每天在做的事。</p>
+
+      <div class="job reveal">
+        <h3 lang="en">China State Construction Eighth Engineering Division, New-Type Construction Co., Ltd.</h3>
+        <h3 lang="zh">中建八局新型建造工程有限公司</h3>
+        <p class="job-meta" lang="en">Finance Intern · Shanghai · Aug 2024</p>
+        <p class="job-meta" lang="zh">财务实习生 · 财务资金部 · 2024.08</p>
+        <ul lang="en">
+          <li>Reviewed approximately 500 May–June vouchers and expense claims against reimbursement policy; codified recurring rejection reasons into a compliance checklist retained by the finance team for audit preparation.</li>
+          <li>Reconciled project costs against operational records, surfacing 20 variances for follow-up before month-end close.</li>
+        </ul>
+        <ul lang="zh">
+          <li>按报销制度复核 5–6 月 500 份左右凭证与费用单据，将高频退单原因固化为合规检查清单，财务团队后续持续用于审计准备。</li>
+          <li>核对项目成本与业务台账，在月末结账前暴露 20 处差异供跟进。</li>
+        </ul>
+      </div>
+
+      <div class="job reveal">
+        <h3 lang="en">Reanda Certified Public Accountants LLP, Jiangsu Branch</h3>
+        <h3 lang="zh">利安达会计师事务所（特殊普通合伙）江苏分所</h3>
+        <p class="job-meta" lang="en">Audit Intern · Jun 2024 – Aug 2024</p>
+        <p class="job-meta" lang="zh">审计实习生 · 2024.06 – 2024.08</p>
+        <ul lang="en">
+          <li>Sampled 300+ expense-cycle vouchers, tracing each to invoice, contract and general-ledger entry; verified exceptions with the client and cleared or proposed each for adjustment before fieldwork close.</li>
+          <li>Prepared 40+ audit working papers to the firm’s indexing standard.</li>
+        </ul>
+        <ul lang="zh">
+          <li>抽样测试费用循环 300+ 笔费用类凭证（含差旅费、办公费等科目），逐笔追溯至发票、合同与总账分录；就单据缺失、审批不全、发票与合同金额不符等异常逐项与客户进行核实，外勤工作结束前全部澄清或提请调整。</li>
+          <li>按事务所索引标准编制 40+ 份审计底稿。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SKILLS ===================== -->
+  <section id="skills">
+    <div class="wrap">
+      <h2><span lang="en">Skills</span><span lang="zh">专业技能</span></h2>
+      <dl class="skills reveal">
+        <dt>Python</dt>
+        <dd lang="en">pandas, data cleaning, grouped aggregation, CSV/file parsing, function encapsulation</dd>
+        <dd lang="zh">pandas、数据清洗、分组汇总、CSV 与文件解析、函数封装</dd>
+
+        <dt>SQL</dt>
+        <dd lang="en">Foundations in progress (NTU MACC data analytics curriculum)</dd>
+        <dd lang="zh">基础学习中（南洋理工 MACC 数据分析方向课程）</dd>
+
+        <dt>Excel</dt>
+        <dd lang="en">PivotTables, INDEX-MATCH / VLOOKUP, SUMIFS / COUNTIFS, dashboards</dd>
+        <dd lang="zh">数据透视表、INDEX-MATCH / VLOOKUP、SUMIFS / COUNTIFS、看板</dd>
+
+        <dt><span lang="en">Statistics</span><span lang="zh">统计分析</span></dt>
+        <dd lang="en">SPSS, Stata (reliability &amp; validity testing, correlation, regression)</dd>
+        <dd lang="zh">SPSS、Stata（信效度检验、相关与回归分析）</dd>
+
+        <dt><span lang="en">Accounting systems</span><span lang="zh">会计系统</span></dt>
+        <dd lang="en">Yonyou U8</dd>
+        <dd lang="zh">用友 U8</dd>
+
+        <dt><span lang="en">Languages</span><span lang="zh">语言</span></dt>
+        <dd lang="en">Mandarin (native), English (IELTS 7.5, Reading 9.0)</dd>
+        <dd lang="zh">中文（母语）、英语（雅思 7.5，阅读 9.0）</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section id="contact">
+    <div class="wrap">
+      <h2><span lang="en">Contact</span><span lang="zh">联系方式</span></h2>
+      <p lang="en">Looking for audit, assurance and data analytics roles in Singapore. Email is the fastest way to reach me.</p>
+      <p lang="zh">在新加坡寻找审计、鉴证与数据分析方向的机会。邮件是最快的联系方式。</p>
+      <ul class="contact-list">
+        <li><span class="label"><span lang="en">Email</span><span lang="zh">邮箱</span></span><a href="mailto:PCHANG007@e.ntu.edu.sg">PCHANG007@e.ntu.edu.sg</a></li>
+        <li><span class="label">GitHub</span><a href="https://github.com/CHANGPeijia-ACC" target="_blank" rel="noopener">github.com/CHANGPeijia-ACC</a></li>
+        <li><span class="label">LinkedIn</span><a href="https://www.linkedin.com/in/peijia-chang" target="_blank" rel="noopener">linkedin.com/in/peijia-chang</a></li>
+        <li><span class="label"><span lang="en">CV</span><span lang="zh">简历</span></span><a href="Chang_Peijia_CV_EN.pdf" target="_blank" rel="noopener" lang="en">Download CV (PDF)</a><a href="Chang_Peijia_CV_CN.pdf" target="_blank" rel="noopener" lang="zh">下载简历（PDF）</a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p lang="en">© 2026 Chang Peijia · Static page, no trackers or analytics.</p>
+    <p lang="zh">© 2026 常沛甲 · 纯静态页面，无追踪与统计脚本。</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var toggle = document.getElementById('lang-toggle');
+
+  function apply(lang) {
+    root.setAttribute('data-lang', lang);
+    root.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+    toggle.querySelectorAll('[data-code]').forEach(function (el) {
+      el.setAttribute('aria-current', String(el.getAttribute('data-code') === lang));
+    });
+    toggle.setAttribute('aria-label', lang === 'zh' ? 'Switch to English' : '切换到中文');
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+
+  apply(root.getAttribute('data-lang') === 'zh' ? 'zh' : 'en');
+  toggle.addEventListener('click', function () {
+    apply(root.getAttribute('data-lang') === 'zh' ? 'en' : 'zh');
+  });
+
+  var items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
