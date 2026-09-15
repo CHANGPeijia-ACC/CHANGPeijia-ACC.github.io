@@ -323,13 +323,13 @@ html.js .reveal.in { opacity: 1; transform: none; }
           <dd lang="zh">月结前的凭证复核通常是手工的：筛异常金额、透视表做科目汇总、用 VLOOKUP 和银行流水核对。慢，而且每个月都要重来一遍。</dd>
 
           <dt>Approach</dt>
-          <dd lang="en">Python standard library only — no third-party dependencies, runs with a single command. Two CSVs in (ledger and bank statement), five reports out: validation, monthly summary, month × account cross-tab, per-account outlier flags, and bank reconciliation.</dd>
-          <dd lang="zh">仅用 Python 标准库，无第三方依赖，一条命令运行。输入账簿与银行流水两个 CSV，输出五份报表：数据校验、月度汇总、月份 × 科目交叉汇总、按科目的异常标记、银行对账。</dd>
+          <dd lang="en">Python standard library only — no third-party dependencies, runs with a single command. Two CSVs in (ledger and bank statement); out come validation results on screen and four CSV reports: monthly summary, month × account cross-tab, per-account outlier flags, and bank reconciliation.</dd>
+          <dd lang="zh">仅用 Python 标准库，无第三方依赖，一条命令运行。输入账簿与银行流水两个 CSV，在屏幕上输出数据校验结果，并生成四份 CSV 报表：月度汇总、月份 × 科目交叉汇总、按科目的异常标记、银行对账。</dd>
         </dl>
 
         <aside class="note" aria-label="Design decisions">
           <p class="note-label">Design decisions</p>
-          <p lang="en" id="dd-en">Outlier thresholds are set per account rather than against a global mean — travel and office expenses sit at different magnitudes: in the sample data, three times the global mean is about 15,356 while three times the office-expense mean is 705, so a global threshold sets the bar for office items more than twenty times higher. Reconciliation is keyed on voucher number rather than row order, since real ledgers and bank statements differ in both count and sequence; keying also separates ledger-only from bank-only differences naturally. Multiple comparison is skipped when an account's mean is non-positive, because "greater than 3x a negative number" would flag nearly everything.</p>
+          <p lang="en" id="dd-en">Outlier thresholds are set per account rather than against a global mean — travel and office expenses sit at different magnitudes: in the sample data, three times the global mean is about 15,356 while three times the office-expense mean is 705, so a global threshold sets the bar for office items more than twenty times higher. Reconciliation is keyed on voucher number rather than row order, since real ledgers and bank statements differ in both count and sequence; keying also separates ledger-only from bank-only differences naturally. The multiple-of-mean check is skipped when an account's mean is non-positive, because "greater than 3x a negative number" would flag nearly everything.</p>
           <p lang="zh" id="dd-zh">异常阈值按科目分别设定，而非用全局均值——差旅费与办公费的量级完全不同：在示例数据中，全局均值的 3 倍约为 15,356，而办公费均值的 3 倍是 705，全局阈值会把办公费的异常门槛抬高二十多倍。对账以凭证号为键而非按行号顺序比对，因为真实账簿与银行流水在笔数和顺序上都不一致；以凭证号为键还能自然区分「只在账簿有」与「只在银行有」两类差异。当某科目均值非正时跳过倍数比较，否则「大于均值 3 倍」会退化成「大于一个更小的负数」，几乎所有记录都会被误判。</p>
         </aside>
 
