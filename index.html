@@ -11,9 +11,9 @@
 <meta property="og:title" content="Chang Peijia — Accounting & Data Analytics">
 <meta property="og:description" content="Accounting × Data — turning dispersed transaction records into figures that withstand review. Audit-focused Python projects, NTU Singapore.">
 <meta property="og:image" content="https://raw.githubusercontent.com/CHANGPeijia-ACC/sg-procurement-analysis/main/outputs/figures/threshold_zoom_90000.png">
-<meta property="og:image:width" content="1145">
-<meta property="og:image:height" content="709">
-<meta property="og:image:alt" content="Award counts cluster just below Singapore's S$90,000 open-tender threshold.">
+<meta property="og:image:width" content="1817">
+<meta property="og:image:height" content="737">
+<meta property="og:image:alt" content="Awards near Singapore's S$90,000 tender threshold, counted by line item and by tender.">
 <meta property="og:url" content="https://changpeijia-acc.github.io/">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -217,7 +217,7 @@ html.js .reveal.in { opacity: 1; transform: none; }
   h2 { font-size: 26px; }
   h3 { font-size: 21px; }
   .card { padding: 22px 18px; }
-  .chart img { width: 560px; max-width: none; }
+  .chart img { width: 760px; max-width: none; }
   .skills { grid-template-columns: 1fr; gap: 2px; }
   .skills dd { margin-bottom: 14px; }
   .contact-list li { flex-direction: column; gap: 0; }
@@ -280,23 +280,23 @@ html.js .reveal.in { opacity: 1; transform: none; }
           <dd lang="zh">采购审计的范围划定通常依赖经验和上年底稿。新加坡公开披露每一笔政府授标，问题就变成：在打开任何一份档案之前，这份公开记录能否指出值得细看的地方。</dd>
 
           <dt>Approach</dt>
-          <dd lang="en">Python and pandas over 18,464 award records across 113 agencies and 6,152 supplier names (FY2021–FY2025, data.gov.sg). Three tests: amount-weighted HHI and CR4 concentration per agency; award clustering in shrinking windows (±10% / ±5% / ±2%) around the published S$6,000 and S$90,000 procurement thresholds; and a Benford chi-square test on leading digits at several minimum-amount floors. Supplier-name normalisation was kept deliberately conservative — punctuation and legal-suffix spelling only, no fuzzy matching — and every one of the 7 merged groups was verified by hand.</dd>
-          <dd lang="zh">用 Python 与 pandas 处理 18,464 条授标记录，覆盖 113 个机构、6,152 个供应商名称（FY2021–FY2025，data.gov.sg）。做三项检验：按机构的金额加权 HHI 与 CR4 集中度；围绕 6,000 与 90,000 新元采购门槛、以逐步收窄的窗口（±10% / ±5% / ±2%）统计授标聚集；以及在多个最小金额下限上对首位数字做 Benford 卡方检验。供应商名称规范化刻意保守——只统一标点与法定后缀拼写，不做模糊匹配——合并的 7 组全部人工复核。</dd>
+          <dd lang="en">Python and pandas over 18,464 award records across 113 agencies and 6,152 supplier names (FY2021–FY2025, data.gov.sg). Three tests: amount-weighted HHI and CR4 concentration per agency; a test for awards clustering just below the S$90,000 tender threshold, run on tender totals in shrinking windows (±10% / ±5% / ±2%) with a one-sided binomial test and seven placebo thresholds; and a Benford chi-square test on leading digits at several minimum-amount floors. Supplier-name normalisation was kept deliberately conservative — punctuation and legal-suffix spelling only, no fuzzy matching — and every one of the 7 merged groups was verified by hand.</dd>
+          <dd lang="zh">用 Python 与 pandas 处理 18,464 条授标记录，覆盖 113 个机构、6,152 个供应商名称（FY2021–FY2025，data.gov.sg）。做三项检验：按机构的金额加权 HHI 与 CR4 集中度；按 tender 汇总金额后，检验授标是否聚集在 90,000 新元招标门槛下方——用逐步收窄的窗口（±10% / ±5% / ±2%）和单侧二项检验，并以七个假门槛作对照；以及在多个最小金额下限上对首位数字做 Benford 卡方检验。供应商名称规范化刻意保守——只统一标点与法定后缀拼写，不做模糊匹配——合并的 7 组全部人工复核。</dd>
 
           <dt>Findings</dt>
-          <dd lang="en">Award amounts cluster below the S$90,000 open-tender threshold, and the below:above ratio sharpens as the window narrows (1.25x at ±10%, 1.61x at ±2%) — the signature of deliberate clustering rather than noise. Several agencies show HHI above 4,000 despite having dozens or hundreds of suppliers on record, because one or two contracts dominate dollar spend. Benford's law fails on the full dataset (p &lt; 0.0001) but fits closely once sub-S$1,000 items are excluded (p = 0.12), which says more about the test's assumptions than about the data.</dd>
-          <dd lang="zh">授标金额在 9 万新元公开招标门槛下方聚集，且窗口越窄、下方对上方的比值越高（±10% 时 1.25 倍，±2% 时 1.61 倍），这是刻意聚集而非随机噪声的特征。多个机构在拥有数十甚至数百家供应商的情况下 HHI 仍超过 4,000，因为一两份大合同主导了金额。Benford 检验在全样本下不通过（p &lt; 0.0001），但剔除 1,000 新元以下的小额记录后拟合良好（p = 0.12）——这说明的是检验本身的适用前提，而非数据异常。</dd>
+          <dd lang="en">At tender level, awards do not cluster below the S$90,000 threshold: within ±2% there are 25 tenders below and 38 above (one-sided p = 0.962). An earlier row-level count showed an excess below (82 vs 51), but it came from counting line items separately and disappears once they are summed per tender. Several agencies show HHI above 4,000 despite having dozens or hundreds of suppliers on record, because one or two contracts dominate dollar spend. Benford's law fails on the full dataset (p &lt; 0.0001) but fits closely once sub-S$1,000 items are excluded (p = 0.12), which says more about the test's assumptions than about the data.</dd>
+          <dd lang="zh">按 tender 汇总后，授标金额并未在 9 万新元门槛下方聚集：±2% 窗口内门槛下方 25 个、上方 38 个（单侧 p = 0.962）。早先按行统计时下方偏多（82 对 51），但那是把同一 tender 的明细项分开计数造成的，按 tender 加总后便消失。多个机构在拥有数十甚至数百家供应商的情况下 HHI 仍超过 4,000，因为一两份大合同主导了金额。Benford 检验在全样本下不通过（p &lt; 0.0001），但剔除 1,000 新元以下的小额记录后拟合良好（p = 0.12）——这说明的是检验本身的适用前提，而非数据异常。</dd>
         </dl>
 
         <figure class="chart">
           <div class="chart-scroll" tabindex="0" role="region" data-label-en="Chart: award counts near the S$90,000 threshold" data-label-zh="图表：9 万新元门槛附近的授标数量" aria-label="Chart: award counts near the S$90,000 threshold">
             <img src="https://raw.githubusercontent.com/CHANGPeijia-ACC/sg-procurement-analysis/main/outputs/figures/threshold_zoom_90000.png"
-                 width="1145" height="709" loading="lazy" decoding="async"
-                 alt="Histogram of award counts in S$1,000 bins from S$81,000 to S$100,000. The tallest bar, about 55 awards, sits in the S$88,000–89,000 band just left of the dashed S$90,000 threshold line; bars to the right of the line are mostly around 20–30."
-                 data-alt-en="Histogram of award counts in S$1,000 bins from S$81,000 to S$100,000. The tallest bar, about 55 awards, sits in the S$88,000–89,000 band just left of the dashed S$90,000 threshold line; bars to the right of the line are mostly around 20–30."
-                 data-alt-zh="授标数量直方图，81,000 至 100,000 新元，每 1,000 新元一档。最高的柱约 55 笔，位于虚线标出的 90,000 新元门槛左侧的 88,000–89,000 新元区间；门槛右侧的柱大多在 20 到 30 笔之间。">
+                 width="1817" height="737" loading="lazy" decoding="async"
+                 alt="Two histograms of awards between S$81,000 and S$99,000 in S$1,000 bins, with a dashed line at S$90,000. Left, counted by line item: 82 awards within 2% below the line and 51 within 2% above. Right, summed per tender: 25 below and 38 above; the tallest bar is the S$90,000–91,000 bin with 29 tenders."
+                 data-alt-en="Two histograms of awards between S$81,000 and S$99,000 in S$1,000 bins, with a dashed line at S$90,000. Left, counted by line item: 82 awards within 2% below the line and 51 within 2% above. Right, summed per tender: 25 below and 38 above; the tallest bar is the S$90,000–91,000 bin with 29 tenders."
+                 data-alt-zh="两幅直方图，范围 81,000 至 99,000 新元，每 1,000 新元一档，虚线为 90,000 新元。左图按明细行计数：门槛下方 2% 内 82 笔，上方 2% 内 51 笔。右图按 tender 加总：下方 25 个，上方 38 个，最高一档是 90,000–91,000 新元，共 29 个。">
           </div>
-          <figcaption><span lang="en">Award counts cluster just below Singapore's S$90,000 open-tender threshold.</span><span lang="zh">授标金额在新加坡 9 万新元公开招标门槛下方明显聚集。</span></figcaption>
+          <figcaption><span lang="en">Around the S$90,000 tender threshold: counting line items (left) shows an excess below; summing per tender (right) does not.</span><span lang="zh">9 万新元招标门槛附近：按明细行计数（左）门槛下方偏多；按 tender 加总（右）则没有。</span></figcaption>
         </figure>
 
         <aside class="note" aria-label="Limitations">
