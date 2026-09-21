@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chang Peijia — Accounting &amp; Data Analytics | NTU Singapore</title>
-<meta name="description" content="Chang Peijia — accounting and data analytics candidate at NTU Singapore. Audit-focused Python projects: a public procurement audit analysis and a voucher validation and reconciliation tool.">
+<meta name="description" content="Chang Peijia — accounting and data analytics candidate at NTU Singapore. Audit-focused Python projects: a public procurement audit analysis and a journal entry testing and bank reconciliation toolkit.">
 <link rel="canonical" href="https://changpeijia-acc.github.io/">
 
 <meta property="og:type" content="website">
@@ -311,30 +311,35 @@ html.js .reveal.in { opacity: 1; transform: none; }
         </div>
       </article>
 
-      <!-- Project 2: voucher tool -->
+      <!-- Project 2: journal entry testing -->
       <article class="card reveal" aria-labelledby="p2-title">
-        <h3 id="p2-title"><span lang="en">Voucher Data Analysis Tool</span><span lang="zh">凭证数据分析工具</span></h3>
+        <h3 id="p2-title"><span lang="en">Journal Entry Testing and Bank Reconciliation Toolkit</span><span lang="zh">凭证测试（JET）与银行对账工具</span></h3>
         <a class="repo-link" href="https://github.com/CHANGPeijia-ACC/voucher-analysis" target="_blank" rel="noopener">github.com/CHANGPeijia-ACC/voucher-analysis</a>
-        <p class="card-oneliner" lang="en">Month-end voucher review, done in Python instead of by hand in Excel.</p>
-        <p class="card-oneliner" lang="zh">把月结前的凭证复核从 Excel 手工搬到 Python。</p>
+        <p class="card-oneliner" lang="en">Eleven audit tests over a full year of journal entries, each scored against a known answer key.</p>
+        <p class="card-oneliner" lang="zh">对一整年的凭证运行 11 项审计测试，并用事先埋好的“标准答案”逐项评分。</p>
         <dl>
           <dt>Problem</dt>
-          <dd lang="en">Pre-close voucher review is usually manual: filter for odd amounts, pivot by account, VLOOKUP against the bank statement. It is slow, and it is repeated every month.</dd>
-          <dd lang="zh">月结前的凭证复核通常是手工的：筛异常金额、透视表做科目汇总、用 VLOOKUP 和银行流水核对。慢，而且每个月都要重来一遍。</dd>
+          <dd lang="en">ISA 240 requires auditors to test journal entries, because entries made outside normal routines are a common way to manipulate results. The rules are well known — weekend postings, entries after close, a preparer approving their own work — but running them by hand over a year of vouchers is slow, and it is rarely measured how many real problems a rule finds against how many normal entries it flags.</dd>
+          <dd lang="zh">ISA 240 要求审计师测试会计分录，因为绕开正常流程的分录是操纵利润的常见手段。规则本身并不难——周末过账、关账后补录、制单人自己审批——难的是对一整年的凭证逐条手工执行；而且很少有人衡量：一条规则到底抓到多少真问题，又误报了多少正常分录。</dd>
 
           <dt>Approach</dt>
-          <dd lang="en">Python standard library only — no third-party dependencies, runs with a single command. Two CSVs in (ledger and bank statement); out come validation results on screen and four CSV reports: monthly summary, month × account cross-tab, per-account outlier flags, and bank reconciliation.</dd>
-          <dd lang="zh">仅用 Python 标准库，无第三方依赖，一条命令运行。输入账簿与银行流水两个 CSV，在屏幕上输出数据校验结果，并生成四份 CSV 报表：月度汇总、月份 × 科目交叉汇总、按科目的异常标记、银行对账。</dd>
+          <dd lang="en">Python and pandas over one synthetic fiscal year: 19,505 journal lines in 5,706 vouchers, generated with a fixed seed and carrying 151 known anomalies of ten types, so every test can be scored. Eleven tests, with every threshold in a YAML config: input validation, unbalanced vouchers, duplicates, weekend and Chinese public-holiday postings, entries outside working hours, entries after period close, round amounts, segregation of duties, split payments just under the approval limit, adjustment keywords in English and Chinese, and amount outliers by a robust z-score (median and MAD) on log amounts per account. A bank reconciliation matches 1,846 statement lines that carry no voucher numbers in three passes — one to one, one bank line to several vouchers, and near-equal amounts set aside for review — comparing whole cents rather than floating-point numbers, and builds a two-sided reconciliation statement. The output is one Excel workpaper, and 77 pytest tests run on GitHub Actions.</dd>
+          <dd lang="zh">用 Python 与 pandas 处理一个合成会计年度：5,706 张凭证、19,505 行分录，以固定随机种子生成，并埋入 10 类共 151 张已知异常凭证，使每项测试都能被量化评分。11 项测试的阈值全部放在 YAML 配置文件里：输入校验、借贷不平、重复入账、周末及中国法定节假日过账、非工作时间录入、关账后录入、整数金额、职责分离（制单人即审批人）、略低于审批限额的拆分付款、中英文调整类关键词，以及按科目在对数金额上计算稳健 z 分数（中位数与 MAD）的离群检验。银行对账把 1,846 条不含凭证号的银行流水分三轮匹配——一对一、一笔流水对应多张凭证、金额相近的留待人工核查——全程以“分”为整数比较，避免浮点误差，并编制双向的银行存款余额调节表。结果输出为一份 Excel 审计底稿；77 个 pytest 测试在 GitHub Actions 上运行。</dd>
+
+          <dt>Findings</dt>
+          <dd lang="en">Together the tests flag 185 of 5,706 vouchers for review, about 3 percent, and catch 148 of the 151 injected anomalies (recall 0.98, precision 0.80). Five tests find every injected case with no false alarm; the remaining false alarms have plain explanations — the monthly rent of exactly 60,000 trips the round-amount test, and the monthly reversal of an accrual trips the keyword test. Scoring outliers on log amounts instead of raw amounts cut the vouchers flagged from 396 to 24 at the cost of one catch, because accounting amounts are right-skewed. The reconciliation finds all 1,850 expected bank-to-book matches with the correct match type, and both sides of the statement agree at 21,310,036.42.</dd>
+          <dd lang="zh">全部测试合计从 5,706 张凭证中标记出 185 张待查，约 3%，抓到 151 张注入异常中的 148 张（召回率 0.98，精确率 0.80）。其中五项测试全部命中且没有误报；其余误报都有明确原因——每月正好 60,000 的房租触发整数金额测试，每月冲回计提触发关键词测试。离群检验改用对数金额后，标记的凭证从 396 张降到 24 张，只少抓一张，因为会计金额呈右偏分布。银行对账找出全部 1,850 组预期配对且类型全部正确，调节表两边调节后余额都是 21,310,036.42。</dd>
         </dl>
 
-        <aside class="note" aria-label="Design decisions">
-          <p class="note-label">Design decisions</p>
-          <p lang="en" id="dd-en">Outlier thresholds are set per account rather than against a global mean — travel and office expenses sit at different magnitudes: in the sample data, three times the global mean is about 15,356 while three times the office-expense mean is 705, so a global threshold sets the bar for office items more than twenty times higher. Reconciliation is keyed on voucher number rather than row order, since real ledgers and bank statements differ in both count and sequence; keying also separates ledger-only from bank-only differences naturally. The multiple-of-mean check is skipped when an account's mean is non-positive, because "greater than 3x a negative number" would flag nearly everything.</p>
-          <p lang="zh" id="dd-zh">异常阈值按科目分别设定，而非用全局均值——差旅费与办公费的量级完全不同：在示例数据中，全局均值的 3 倍约为 15,356，而办公费均值的 3 倍是 705，全局阈值会把办公费的异常门槛抬高二十多倍。对账以凭证号为键而非按行号顺序比对，因为真实账簿与银行流水在笔数和顺序上都不一致；以凭证号为键还能自然区分「只在账簿有」与「只在银行有」两类差异。当某科目均值非正时跳过倍数比较，否则「大于均值 3 倍」会退化成「大于一个更小的负数」，几乎所有记录都会被误判。</p>
+        <aside class="note" aria-label="Limitations">
+          <p class="note-label">Limitations</p>
+          <p lang="en">All data is synthetic, so the scores show that each test does what it was designed to do, not how it would perform on a real ledger. Thresholds are defaults rather than audit judgement; on an engagement they would be set against materiality. The holiday calendar does not know Chinese make-up working days, and the 7-day duplicate window misses one pair split by the Spring Festival.</p>
+          <p lang="zh">数据全部为合成数据，所以这些分数说明的是每项测试按设计工作，而不是它在真实账套上的表现。阈值是默认值，不是审计判断；实际项目中应结合重要性水平确定。节假日日历不识别中国的调休上班日，7 天的重复入账窗口会漏掉被春节隔开的一对凭证。</p>
         </aside>
 
         <div class="btns">
           <a class="btn btn-primary" href="https://github.com/CHANGPeijia-ACC/voucher-analysis" target="_blank" rel="noopener"><span lang="en">View on GitHub</span><span lang="zh">在 GitHub 查看</span></a>
+          <a class="btn" href="https://github.com/CHANGPeijia-ACC/voucher-analysis#evaluation" target="_blank" rel="noopener"><span lang="en">See the evaluation</span><span lang="zh">查看评估结果</span></a>
         </div>
       </article>
     </div>
